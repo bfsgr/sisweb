@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PMS</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar-collapse"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Mostrar/esconder navegação</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home.html">
+            <img src="img/logo.svg" height="42px" width="42px" />
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Perfil<span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="profile.html">Perfil</a>
+                </li>
+                <li>
+                  <a href="cards.html">Cartões</a>
+                </li>
+                <li>
+                  <a href="pix.html">Pix</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="active">
+              <a href="home.html">Comentários/sugestões</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="btn btn-link" type="button" onclick="logout()">
+                Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <form id="comment-form" method="post" onsubmit="commentSubmit(event)">
+            <div class="form-group">
+              <label for="comment">Novo comentário</label>
+              <textarea
+                id="comment"
+                name="comment"
+                class="form-control"
+                placeholder="Adicione um comentário ou sugestão"
+                rows="3"
+                required
+                minlength="3"
+              ></textarea>
+            </div>
+            <div class="form-group text-right">
+              <button class="btn btn-outline" type="reset">Limpar</button>
+              <button class="btn btn-primary" type="submit">Adicionar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              Eos aspernatur repellendus occaecati doloremque. Vero hic illum
+              qui sunt deleniti dolorem voluptatibus et. Non ullam at dolorem.
+              Deserunt sunt inventore mollitia et. Id aliquam dolor sit
+              provident laudantium corporis. Quia molestiae voluptate expedita
+              reiciendis debitis.
+            </div>
+            <div class="panel-footer">02/08/2024, 14:00</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="js/vendor/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/home.js"></script>
+  </body>
+</html>

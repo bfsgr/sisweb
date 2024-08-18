@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PMS</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar-collapse"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Mostrar/esconder navegação</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home.html">
+            <img src="img/logo.svg" height="42px" width="42px" />
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Perfil<span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="profile.html">Perfil</a>
+                </li>
+                <li class="">
+                  <a href="cards.html">Cartões</a>
+                </li>
+                <li class="active">
+                  <a href="pix.html">Pix</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="">
+              <a href="home.html">Comentários/sugestões</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="btn btn-link" type="button" onclick="logout()">
+                Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <form method="post">
+        <fieldset>
+          <legend>Cadastrar nova chave pix</legend>
+          <div class="form-group">
+            <label for="type">Tipo</label>
+            <select id="type" class="form-control" name="type" required>
+              <option hidden value="">-</option>
+              <option value="celular">Celular</option>
+              <option value="email">Email</option>
+              <option value="cpf">CPF</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="key">Chave</label>
+            <input
+              type="text"
+              id="key"
+              class="form-control"
+              name="key"
+              placeholder="Chave"
+              required
+            />
+          </div>
+
+          <div class="form-group text-right" role="group">
+            <button class="btn btn-default" type="button">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="js/vendor/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+</html>

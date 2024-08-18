@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>PMS</title>
+    <link rel="icon" type="image/png" href="img/favicon.png" sizes="16x16" />
+
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap-theme.min.css" />
+    <link type="text/css" rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body>
+    <div id="navbar" class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button
+            type="button"
+            class="navbar-toggle collapsed"
+            data-toggle="collapse"
+            data-target="#navbar-collapse"
+            aria-expanded="false"
+          >
+            <span class="sr-only">Mostrar/esconder navegação</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="home.html">
+            <img src="img/logo.svg" height="42px" width="42px" />
+          </a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a
+                href="#"
+                class="dropdown-toggle"
+                data-toggle="dropdown"
+                role="button"
+                aria-haspopup="true"
+                aria-expanded="false"
+                >Perfil<span class="caret"></span
+              ></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a href="profile.html">Perfil</a>
+                </li>
+                <li class="active">
+                  <a href="cards.html">Cartões</a>
+                </li>
+                <li>
+                  <a href="pix.html">Pix</a>
+                </li>
+              </ul>
+            </li>
+
+            <li class="">
+              <a href="home.html">Comentários/sugestões</a>
+            </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a class="btn btn-link" type="button" onclick="logout()">
+                Sair
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="cardFormPage" class="container">
+      <form method="post">
+        <fieldset>
+          <legend>Cadastrar novo cartão</legend>
+          <div class="form-group">
+            <label for="type">Tipo</label>
+            <select id="type" class="form-control" name="type" required>
+              <option hidden value="">-</option>
+              <option value="debit">Débito</option>
+              <option value="credit">Crédito</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="flag">Bandeira</label>
+            <select id="flag" class="form-control" name="flag" required>
+              <option hidden value="">-</option>
+              <option value="mastercard">Mastercard</option>
+              <option value="visa">Visa</option>
+              <option value="elo">Elo</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="number">Número</label>
+            <input
+              type="text"
+              id="number"
+              class="form-control"
+              name="number"
+              placeholder="Número"
+              data-mask="0000 0000 0000 0000"
+              minlength="19"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="expiration">Data de validade</label>
+            <input
+              type="text"
+              id="expiration"
+              class="form-control"
+              name="expiration"
+              placeholder="MM/AA"
+              data-mask="00/00"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input
+              type="text"
+              id="cvv"
+              class="form-control"
+              name="cvv"
+              placeholder="CVV"
+              data-mask="000"
+              required
+            />
+          </div>
+
+          <div class="form-group text-right" role="group">
+            <button class="btn btn-default" type="button">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Cadastrar</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+
+    <script type="text/javascript" src="js/vendor/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.mask.min.js"></script>
+    <script type="text/javascript" src="js/vendor/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+  </body>
+</html>
