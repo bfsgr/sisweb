@@ -1,0 +1,30 @@
+.welcome-img {
+    margin: 1em 0;
+}
+
+.navbar-brand {
+    padding: 0 15px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-default .navbar-nav > .active > a {
+    background: transparent;
+    box-shadow: none;
+    text-decoration: underline;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+    background: transparent;
+    color: #333;
+}
+
+.legend-with-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#state {
+    pointer-events: none;
+}
