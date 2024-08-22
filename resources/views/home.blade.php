@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <form id="comment-form" method="post" >
+                <form id="comment-form" method="post">
                     <div class="form-group">
                         <label for="comment">Novo comentário</label>
                         <textarea
@@ -23,19 +23,24 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        Eos aspernatur repellendus occaecati doloremque. Vero hic illum
-                        qui sunt deleniti dolorem voluptatibus et. Non ullam at dolorem.
-                        Deserunt sunt inventore mollitia et. Id aliquam dolor sit
-                        provident laudantium corporis. Quia molestiae voluptate expedita
-                        reiciendis debitis.
+        @forelse($comments as $comment)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            {{$comment->text}}
+                        </div>
+                        <div class="panel-footer">{{ date_format($comment->created_at, 'd/m/Y, H:i')  }}</div>
                     </div>
-                    <div class="panel-footer">02/08/2024, 14:00</div>
                 </div>
             </div>
-        </div>
+        @empty
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <p>Nenhum comentário ou sugestão cadastrado</p>
+                </div>
+            </div>
+
+        @endforelse
     </div>
 </x-layout>

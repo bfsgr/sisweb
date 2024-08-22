@@ -2,9 +2,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                @if (!$user)
+                @if(Route::is('clients.create'))
+                    <div class="alert alert-info">
+                        <p>O cliente receberá um link por e-mail para criar a senha de acesso</p>
+                    </div>
+                @endif
+
+                @if (Route::is('register'))
                     <div class="text-center welcome-img">
-                        <img alt="Logomarca" src="logo.svg" height="100px" />
+                        <img alt="Logomarca" src="/logo.svg" height="100px" />
                     </div>
                 @endif
 
@@ -28,7 +34,7 @@
                                 placeholder="Email"
                                 required
                                 value="{{ old('email') ?? $user->email ?? "" }}"
-                                @auth readonly @endauth
+                                @if($user) readonly @endif
                                 @error('email') aria-describedby="emailError" @enderror
                             />
                             @error('email')
@@ -37,23 +43,25 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="form-group @error('password') has-error @enderror">
-                            <label for="password">Senha</label>
-                            <input
-                                id="password"
-                                class="form-control"
-                                type="password"
-                                name="password"
-                                placeholder="Senha"
-                                required
-                                @error('password') aria-describedby="passwordError" @enderror
-                            />
-                            @error('password')
-                            <span id="passwordError" class="help-block">
+                        @if(Route::is('register') || Route::is('profile'))
+                            <div class="form-group @error('password') has-error @enderror">
+                                <label for="password">Senha</label>
+                                <input
+                                    id="password"
+                                    class="form-control"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Senha"
+                                    required
+                                    @error('password') aria-describedby="passwordError" @enderror
+                                />
+                                @error('password')
+                                <span id="passwordError" class="help-block">
                                 {{ $message }}
                             </span>
-                            @enderror
-                        </div>
+                                @enderror
+                            </div>
+                        @endif
                     </fieldset>
 
                     <fieldset>
@@ -90,7 +98,7 @@
                                 maxlength="12"
                                 required
                                 value="{{ old('rg') ?? $user->rg ?? "" }}"
-                                @auth readonly @endauth
+                                @if($user) readonly @endif
                                 @error('rg') aria-describedby="rgError" @enderror
                             />
                             @error('rg')
@@ -113,7 +121,7 @@
                                 maxlength="14"
                                 required
                                 value="{{ old('cpf') ?? $user->cpf ?? "" }}"
-                                @auth readonly @endauth
+                                @if($user) readonly @endif
                                 @error('cpf') aria-describedby="cpfError" @enderror
                             />
                             @error('cpf')
@@ -136,8 +144,8 @@
                                 name="cep"
                                 placeholder="00000-000"
                                 data-mask="00000-000"
-                                {{--                                minlength="9"--}}
-                                {{--                                maxlength="9"--}}
+                                minlength="9"
+                                maxlength="9"
                                 required
                                 value="{{ old('cep') ?? $user->cep ?? "" }}"
                                 @error('cep') aria-describedby="cepError" @enderror
@@ -284,7 +292,7 @@
                     </fieldset>
 
                     <div class="form-group text-right" role="group">
-                        @auth
+                        @if($user)
                             <button id="revert-btn" class="btn btn-default" type="reset">
                                 Limpar
                             </button>
@@ -292,13 +300,19 @@
                                 Salvar alterações
                             </button>
                         @else
-                            <a class="btn btn-default" href="/login">
-                                Login
-                            </a>
+                            @auth
+                                <button id="revert-btn" class="btn btn-default" type="reset">
+                                    Limpar
+                                </button>
+                            @else
+                                <a class="btn btn-default" href="/login">
+                                    Login
+                                </a>
+                            @endauth
                             <button class="btn btn-primary" type="submit">
-                                Cadastrar-se
+                                Cadastrar
                             </button>
-                        @endauth
+                        @endif
                     </div>
                 </form>
             </div>

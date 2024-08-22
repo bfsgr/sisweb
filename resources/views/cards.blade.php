@@ -17,48 +17,37 @@
             </thead>
 
             <tbody>
-            <tr>
-                <td>9876</td>
-                <td>Mastercard</td>
-                <td>Crédito</td>
-                <td class="text-center">
-                    <a class="btn btn-default" type="button" href="cards/1/edit"
-                    >Editar</a
-                    >
-                </td>
-            </tr>
+            @forelse($cards as $card)
+                <tr>
+                    <td>{{substr($card->number, 12)}}</td>
+                    <td>{{$card->flag}}</td>
+                    <td>{{__($card->type)}}</td>
+                    <td class="text-center">
+                        <div class="btn-group">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="/cards/{{$card->id}}/edit">Editar</a>
+                            </div>
+                            <form method="post" action="/cards/{{$card->id}}" class="btn-group"
+                                  onsubmit="return confirm('Tem certeza que deseja excluir este cartão?')">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-block" type="submit">Excluir</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">Nenhum cartão cadastrado</td>
+                </tr>
+            @endforelse
 
-            <tr>
-                <td>9873</td>
-                <td>Visa</td>
-                <td>Débito</td>
-                <td class="text-center">
-                    <a class="btn btn-default" type="button" href="cards/2/edit"
-                    >Editar</a
-                    >
-                </td>
-            </tr>
+
             </tbody>
         </table>
 
         <nav class="text-right" aria-label="Navegação">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Próximo">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
+            {{ $cards->links() }}
         </nav>
     </div>
 

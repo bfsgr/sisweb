@@ -17,37 +17,41 @@
             </thead>
 
             <tbody>
-            <tr>
-                <td>(44) 98899-8899</td>
-                <td>31/07/2024</td>
-                <td>Celular</td>
-                <td class="text-center">
-                    <a class="btn btn-default" type="button" href="pix/1/edit"
-                    >Editar</a
-                    >
-                </td>
-            </tr>
+            @forelse($pix as $p)
+                <tr>
+                    <td
+                        @switch($p->type)
+                            @case("cpf")
+                                data-mask="000.000.000-00"
+                        @break
+                        @case("phone")
+                            data-mask="(00) 00000-0000"
+                        @break
+                        @case("email")
+                            data-mask=""
+                        @break
+                        @endswitch
+                    >{{$p->key}}</td>
+                    <td>{{$p->created_at->format("d/m/Y - H:i")}}</td>
+                    <td>{{__($p->type)}}</td>
+                    <td class="text-center">
+                        <a class="btn btn-default" type="button" href="pix/{{$p->id}}/edit"
+                        >Editar</a
+                        >
+                    </td>
+                </tr>
+
+            @empty
+                <tr>
+                    <td colspan="4" class="text-center">Nenhuma chave pix cadastrada</td>
+                </tr>
+            @endforelse
+
             </tbody>
         </table>
 
         <nav class="text-right" aria-label="Navegação">
-            <ul class="pagination">
-                <li>
-                    <a href="#" aria-label="Anterior">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                </li>
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li>
-                    <a href="#" aria-label="Próximo">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                </li>
-            </ul>
+            {{ $pix->links() }}
         </nav>
     </div>
 

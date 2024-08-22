@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>PMS</title>
 
-    <link rel="icon" type="image/png" href="favicon.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/favicon.png" sizes="16x16" />
     <link type="text/css" rel="stylesheet" href="{{ asset('vendor/css/bootstrap.min.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ asset('vendor/css/bootstrap-theme.min.css') }}" />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -62,6 +62,12 @@
                     <li @class(["active" => Route::is('comments.index')])>
                         <a href="/comments">Comentários/sugestões</a>
                     </li>
+
+                    @if(auth()->user()['role'] == 'employee')
+                        <li @class(["active" => Route::is('clients.index')])>
+                            <a href="/clients">Clientes</a>
+                        </li>
+                    @endif
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
