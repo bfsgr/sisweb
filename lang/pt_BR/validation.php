@@ -172,6 +172,9 @@ return [
         'cpf' => 'CPF',
         'rg' => 'RG',
         'cep' => 'CEP',
+        'expiration' => 'data de validade',
+        'flag' => 'bandeira',
+        'cvv' => 'CVV',
         'body' => 'conteúdo',
         'cell' => 'célula',
         'city' => 'cidade',
@@ -221,4 +224,15 @@ return [
         'birth_date' => 'data de nascimento',
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Custom Validation Values
+    |--------------------------------------------------------------------------
+    */
+
+    'values' => [
+        'expiration' => [
+            'now' => 'hoje'
+        ]
+    ]
 ];

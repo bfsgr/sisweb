@@ -96,7 +96,7 @@
                         name="expiration"
                         placeholder="MM/AAAA"
                         data-mask="00/0000"
-                        value="{{ old('expiration') ?? $card ? date_format($card->expiration, 'm/Y') : '' }}"
+                        value="{{ old('expiration') ?? (isset($card) && $card->expiration ? date_format($card->expiration, 'm/Y') : '') }}"
                         data-ignore-submit-unmask="true"
                         required
                         @error('expiration') aria-describedby="expirationError" @enderror

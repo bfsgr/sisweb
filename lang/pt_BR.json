@@ -12,5 +12,7 @@
     "debit": "Débito",
     "phone": "Telefone",
     "email": "E-mail",
-    "cpf": "CPF"
+    "cpf": "CPF",
+    "expiration": "data de validade",
+    "now": "hoje"
 }
