@@ -25,7 +25,11 @@
                                 data-mask="000.000.000-00"
                         @break
                         @case("phone")
-                            data-mask="(00) 00000-0000"
+                            @if(strlen($p->key) == 11)
+                                data-mask="(00) 00000-0000"
+                        @else
+                            data-mask="(00) 0000-0000"
+                        @endif
                         @break
                         @case("email")
                             data-mask=""
@@ -35,9 +39,17 @@
                     <td>{{$p->created_at->format("d/m/Y - H:i")}}</td>
                     <td>{{__($p->type)}}</td>
                     <td class="text-center">
-                        <a class="btn btn-default" type="button" href="pix/{{$p->id}}/edit"
-                        >Editar</a
-                        >
+                        <div class="btn-group">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="/pix/{{$p->id}}/edit">Editar</a>
+                            </div>
+                            <form method="post" action="/pix/{{$p->id}}" class="btn-group"
+                                  onsubmit="return confirm('Tem certeza que deseja excluir este cartão?')">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-block" type="submit">Excluir</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
 

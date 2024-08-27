@@ -175,6 +175,7 @@ return [
         'expiration' => 'data de validade',
         'flag' => 'bandeira',
         'cvv' => 'CVV',
+        'key' => 'chave',
         'body' => 'conteúdo',
         'cell' => 'célula',
         'city' => 'cidade',

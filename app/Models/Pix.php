@@ -21,6 +21,7 @@ class Pix extends Model
     protected $fillable = [
         'type',
         'key',
+        'user_id'
     ];
 
     public function user(): BelongsTo
