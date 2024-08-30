@@ -12,6 +12,7 @@
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>Email</th>
+                <th>Pedidos</th>
                 <th class="text-center">Ações</th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td>{{$client->name}}</td>
                     <td data-mask="000.000.000-00">{{$client->cpf}}</td>
                     <td>{{$client->email}}</td>
+                    <td>0</td>
                     <td class="text-center">
                         <div class="btn-group">
                             <div class="btn-group">

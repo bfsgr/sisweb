@@ -50,10 +50,10 @@
                             <li @class(["active" => Route::is('profile')])>
                                 <a href="/profile">Perfil</a>
                             </li>
-                            <li @class(["active" => Route::is('cards.index')])>
+                            <li @class(["active" => Route::is('cards.index'), "hidden" => auth()->user()->role =='employee'])>
                                 <a href="/cards">Cartões</a>
                             </li>
-                            <li @class(["active" => Route::is('pix.index')])>
+                            <li @class(["active" => Route::is('pix.index'),  "hidden" => auth()->user()->role =='employee'])>
                                 <a href="/pix">Pix</a>
                             </li>
                         </ul>
