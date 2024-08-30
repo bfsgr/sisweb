@@ -53,5 +53,9 @@
             </div>
 
         @endforelse
+
+        <nav class="text-right" aria-label="Navegação">
+            {{$comments->links()}}
+        </nav>
     </div>
 </x-layout>
