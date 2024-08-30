@@ -36,7 +36,7 @@
                         @break
                         @endswitch
                     >{{$p->key}}</td>
-                    <td>{{$p->created_at->format("d/m/Y - H:i")}}</td>
+                    <td>{{$p->created_at->setTimezone('America/Sao_Paulo')->format("d/m/Y - H:i")}}</td>
                     <td>{{__($p->type)}}</td>
                     <td class="text-center">
                         <div class="btn-group">

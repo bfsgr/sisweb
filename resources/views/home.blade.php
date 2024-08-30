@@ -30,7 +30,8 @@
                         <div class="panel-body">
                             {{$comment->text}}
                         </div>
-                        <div class="panel-footer">{{ date_format($comment->created_at, 'd/m/Y, H:i')  }}</div>
+                        <div
+                            class="panel-footer">{{ $comment->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y, H:i')  }}</div>
                     </div>
                 </div>
             </div>
