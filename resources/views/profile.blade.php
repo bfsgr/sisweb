@@ -20,7 +20,11 @@
                     </div>
                 @endif
 
-                <form method="post">
+                <form method="post"
+                      @if(Route::is('clients.create'))
+                          action="{{ route('clients.store') }}"
+                    @endif
+                >
                     @csrf
                     <fieldset>
                         <legend>Informações de acesso</legend>
@@ -213,6 +217,7 @@
                                 id="complement"
                                 class="form-control"
                                 name="complement"
+                                required
                                 placeholder="Complemento"
                                 value="{{ old('complement') ?? $user->complement ?? "" }}"
                                 @error('complement') aria-describedby="complementError" @enderror

@@ -25,8 +25,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/profile', [UserController::class, 'index'])->name('profile');
     Route::post('/profile', [UserController::class, 'update']);
-
-
 });
 
 Route::get('/login', [AuthController::class, 'index'])->name('login');
@@ -34,3 +32,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/register', [UserController::class, 'create'])->name('register');
 Route::post('/register', [UserController::class, 'store']);
+
+Route::get('/new-password', [AuthController::class, 'newPassword'])->name('password.reset');
+Route::post('/new-password', [AuthController::class, 'update']);
