@@ -134,12 +134,17 @@ class ClientController extends Controller
 
         $data = $validator->validated();
 
-        $user = $id ? User::findOrFail($id) : new User();
+        if ($id) {
+            $user = User::findOrFail($id);
+
+        } else {
+            $user = new User();
+            $user->password = bcrypt(Str::random(8));
+        }
 
         $user->fill([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => bcrypt(Str::random(16)),
             'cpf' => $data['cpf'],
             'rg' => $data['rg'],
             'cep' => $data['cep'],
@@ -150,6 +155,7 @@ class ClientController extends Controller
             'neighborhood' => $data['neighborhood'],
             'state' => $data['state']
         ]);
+
 
         return $user;
     }

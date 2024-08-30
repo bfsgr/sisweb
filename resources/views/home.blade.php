@@ -3,11 +3,12 @@
         <div class="row">
             <div class="col-md-12">
                 <form id="comment-form" method="post">
+                    @csrf
                     <div class="form-group">
-                        <label for="comment">Novo comentário</label>
+                        <label for="text">Novo comentário</label>
                         <textarea
-                            id="comment"
-                            name="comment"
+                            id="text"
+                            name="text"
                             class="form-control"
                             placeholder="Adicione um comentário ou sugestão"
                             rows="3"
@@ -30,8 +31,17 @@
                         <div class="panel-body">
                             {{$comment->text}}
                         </div>
-                        <div
-                            class="panel-footer">{{ $comment->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y, H:i')  }}</div>
+                        <div class="panel-footer legend-with-btn">
+                            {{$comment->user->name}}
+                            - {{ $comment->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y, H:i')  }}
+                            <form method="post" action="/comments/{{$comment->id}}">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger">
+                                    <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
