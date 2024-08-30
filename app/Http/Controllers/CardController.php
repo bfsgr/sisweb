@@ -25,30 +25,13 @@ class CardController extends Controller
 
     public function store(): RedirectResponse
     {
-        $validator = Validator::make(request()->all(), [
-            'type' => 'required|in:credit,debit',
-            'flag' => 'required|in:Visa,Mastercard,Elo',
-            'number' => 'required|digits:16',
-            'expiration' => 'required|size:7|date_format:m/Y|after:now',
-            'cvv' => 'required|size:3',
-        ]);
+        $result = $this->instantiate(null, request()->all());
 
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
+        if ($result instanceof RedirectResponse) {
+            return $result;
         }
 
-        $data = $validator->validated();
-
-        $data['user_id'] = auth()->id();
-
-        $card = new Card([
-            'type' => $data['type'],
-            'flag' => $data['flag'],
-            'number' => $data['number'],
-            'expiration' => Carbon::createFromFormat('d/m/Y', '01/' . $data['expiration']),
-            'cvv' => $data['cvv'],
-            'user_id' => $data['user_id'],
-        ]);
+        $card = $result;
 
         if ($card->save()) {
             return redirect()->route('cards.index');
@@ -71,31 +54,13 @@ class CardController extends Controller
 
     public function update($id): RedirectResponse
     {
-        $card = Card::findOrFail($id);
+        $result = $this->instantiate($id, request()->all());
 
-        if ($card->user_id !== auth()->id()) {
-            return redirect()->route('cards.index');
+        if ($result instanceof RedirectResponse) {
+            return $result;
         }
 
-        $validator = Validator::make(request()->all(), [
-            'type' => 'required|in:credit,debit',
-            'flag' => 'required|in:Visa,Mastercard,Elo',
-            'number' => 'required|digits:16',
-            'expiration' => 'required|size:7|date_format:m/Y|after:now',
-            'cvv' => 'required|size:3',
-        ]);
-
-        if ($validator->fails()) {
-            return back()->withErrors($validator)->withInput();
-        }
-
-        $data = $validator->validated();
-
-        $card->type = $data['type'];
-        $card->flag = $data['flag'];
-        $card->number = $data['number'];
-        $card->expiration = Carbon::createFromFormat('d/m/Y', '01/' . $data['expiration']);
-        $card->cvv = $data['cvv'];
+        $card = $result;
 
         if ($card->save()) {
             return redirect()->route('cards.index');
@@ -115,5 +80,43 @@ class CardController extends Controller
         $card->delete();
 
         return redirect()->route('cards.index');
+    }
+
+    private function instantiate(int|null $id, array $data): Card|RedirectResponse
+    {
+        $validator = Validator::make(request()->all(), [
+            'type' => 'required|in:credit,debit',
+            'flag' => 'required|in:Visa,Mastercard,Elo',
+            'number' => 'required|digits:16',
+            'expiration' => 'required|size:7|date_format:m/Y|after:now',
+            'cvv' => 'required|size:3',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        $data = $validator->validated();
+
+        if ($id) {
+            $card = Card::findOrFail($id);
+
+            if ($card->user_id !== auth()->id()) {
+                return redirect()->route('cards.index');
+            }
+        } else {
+            $card = new Card();
+        }
+
+        $card->type = $data['type'];
+        $card->flag = $data['flag'];
+        $card->number = $data['number'];
+        $card->expiration = Carbon::createFromFormat('d/m/Y', '01/' . $data['expiration']);
+        $card->cvv = $data['cvv'];
+        if (!$id) {
+            $card->user_id = auth()->id();
+        }
+
+        return $card;
     }
 }
