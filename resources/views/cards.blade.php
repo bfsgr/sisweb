@@ -1,12 +1,13 @@
 <x-layout>
     <div class="container">
+        <div class="legend-with-btn">
+            <h3>Cartões</h3>
+            <a class="btn btn-primary" href="cards/create"
+            >Cadastrar novo cartão</a
+            >
+        </div>
+
         <table class="table table-bordered table-hover">
-            <legend class="legend-with-btn">
-                <p>Cartões</p>
-                <a class="btn btn-primary" href="cards/create"
-                >Cadastrar novo cartão</a
-                >
-            </legend>
             <thead>
             <tr>
                 <th>Final do cartão</th>

@@ -1,12 +1,32 @@
 <x-layout>
     <div class="container">
+        <div class="legend-with-btn">
+            <h3>Clientes</h3>
+            <a class="btn btn-primary" href="/clients/create">
+                Cadastrar novo cliente
+            </a>
+
+        </div>
+
+        <form class="search-bar" method="get">
+            <select class="form-control" name="field">
+                <option value="name" @selected(old('field') == 'name') >Nome</option>
+                <option value="cpf" @selected(old('field') == 'cpf') >CPF</option>
+                <option value="email" @selected(old('field') == 'email') >Email</option>
+            </select>
+
+            <input id="search" name="search-text" class="form-control" placeholder="Pesquisar"
+                   value="{{old('search-text')}}"
+            >
+
+            <button class="btn btn-default" type="submit">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </form>
+
         <table class="table table-bordered table-hover">
-            <legend class="legend-with-btn">
-                <p>Clientes</p>
-                <a class="btn btn-primary" href="/clients/create"
-                >Cadastrar novo cliente</a
-                >
-            </legend>
+
+
             <thead>
             <tr>
                 <th>Nome</th>

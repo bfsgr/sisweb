@@ -14,13 +14,33 @@ use Str;
 
 class ClientController extends Controller
 {
-    public function index(): View
+    public function index(): View|RedirectResponse
     {
         if (request()->user()->cannot('viewAny', User::class)) {
             abort(403);
         }
 
-        $clients = User::whereRole('customer')->paginate(10);
+        $validator = Validator::make(request()->query(), [
+            "field" => 'in:name,email,cpf',
+            'search-text' => 'nullable|string'
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+
+        $data = $validator->validated();
+
+        $field = $data['field'] ?? null;
+        $searchText = $data['search-text'] ?? null;
+
+        $clients = User::whereRole('customer')
+            ->when($field && $searchText, function ($query) use ($field, $searchText) {
+                return $query->where($field, 'like', "%$searchText%");
+            })
+            ->paginate(10);
+
+        request()->flash();
 
         return view('clients', compact('clients'));
     }

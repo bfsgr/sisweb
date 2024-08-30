@@ -1,12 +1,12 @@
 <x-layout>
     <div class="container">
+        <div class="legend-with-btn">
+            <h3>Chaves pix</h3>
+            <a class="btn btn-primary" href="pix/create">
+                Cadastrar nova chave
+            </a>
+        </div>
         <table class="table table-bordered table-hover">
-            <legend class="legend-with-btn">
-                <p>Chaves pix</p>
-                <a class="btn btn-primary" href="pix/create">
-                    Cadastrar nova chave
-                </a>
-            </legend>
             <thead>
             <tr>
                 <th>Chave</th>

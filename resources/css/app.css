@@ -23,6 +23,26 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    border-bottom: 1px solid lightgray;
+    margin-bottom: 2rem;
+}
+
+.search-bar {
+    display: flex;
+    gap: 1rem;
+
+    margin-bottom: 2rem;
+}
+
+.search-bar select {
+    width: min-content;
+}
+
+.footer-with-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #state {

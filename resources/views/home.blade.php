@@ -31,7 +31,7 @@
                         <div class="panel-body">
                             {{$comment->text}}
                         </div>
-                        <div class="panel-footer legend-with-btn">
+                        <div class="panel-footer footer-with-actions">
                             {{$comment->user->name}}
                             - {{ $comment->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y, H:i')  }}
                             <form method="post" action="/comments/{{$comment->id}}">
