@@ -23,8 +23,14 @@
                 <form method="post"
                       @if(Route::is('clients.create'))
                           action="{{ route('clients.store') }}"
+                      @elseif (Route::is('clients.edit'))
+                          action="{{ route('clients.update', $user->id) }}"
                     @endif
                 >
+                    @if(Route::is('clients.edit'))
+                        @method('put')
+                    @endif
+                    
                     @csrf
                     <fieldset>
                         <legend>Informações de acesso</legend>
@@ -38,7 +44,7 @@
                                 placeholder="Email"
                                 required
                                 value="{{ old('email') ?? $user->email ?? "" }}"
-                                @if($user) readonly @endif
+                                @if($user && !Route::is('clients.edit')) readonly @endif
                                 @error('email') aria-describedby="emailError" @enderror
                             />
                             @error('email')
@@ -102,7 +108,7 @@
                                 maxlength="12"
                                 required
                                 value="{{ old('rg') ?? $user->rg ?? "" }}"
-                                @if($user) readonly @endif
+                                @if($user && !Route::is('clients.edit')) readonly @endif
                                 @error('rg') aria-describedby="rgError" @enderror
                             />
                             @error('rg')
@@ -125,7 +131,7 @@
                                 maxlength="14"
                                 required
                                 value="{{ old('cpf') ?? $user->cpf ?? "" }}"
-                                @if($user) readonly @endif
+                                @if($user && !Route::is('clients.edit')) readonly @endif
                                 @error('cpf') aria-describedby="cpfError" @enderror
                             />
                             @error('cpf')

@@ -24,9 +24,17 @@
                     <td data-mask="000.000.000-00">{{$client->cpf}}</td>
                     <td>{{$client->email}}</td>
                     <td class="text-center">
-                        <a class="btn btn-default" type="button" href="/clients/{{$client->id}}/edit"
-                        >Editar</a
-                        >
+                        <div class="btn-group">
+                            <div class="btn-group">
+                                <a class="btn btn-default" href="/clients/{{$client->id}}/edit">Editar</a>
+                            </div>
+                            <form method="post" action="/clients/{{$client->id}}" class="btn-group"
+                                  onsubmit="return confirm('Tem certeza que deseja excluir este cliente?')">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-danger btn-block" type="submit">Excluir</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
 

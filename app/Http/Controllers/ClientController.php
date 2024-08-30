@@ -40,11 +40,85 @@ class ClientController extends Controller
             abort(403);
         }
 
-        $validator = Validator::make(request()->all(), [
+        $newUser = $this->instantiate(null, request()->all());
+
+        if ($newUser instanceof RedirectResponse) {
+            return $newUser;
+        }
+
+        if ($newUser->save()) {
+            Password::sendResetLink(['email' => $newUser['email']]);
+
+            return redirect()->route('clients.index');
+        } else {
+            return back()->with('error', 'Erro ao criar usuário')->withInput(request()->except('password'));
+        }
+    }
+
+    public function edit(int $id): View
+    {
+        $user = User::findOrFail($id);
+
+        if (request()->user()->cannot('update', auth()->user(), $user)) {
+            abort(403);
+        }
+
+        return view('profile', compact('user'));
+    }
+
+    public function update(int $id): RedirectResponse
+    {
+        $user = $this->instantiate($id, request()->all());
+
+        if ($user instanceof RedirectResponse) {
+            return $user;
+        }
+
+        if ($user->save()) {
+            if ($user->wasChanged('email')) {
+                Password::sendResetLink(['email' => $user['email']]);
+            }
+            return redirect()->route('clients.index');
+        } else {
+            return back()->with('error', 'Erro ao atualizar usuário')->withInput(request()->except('password'));
+        }
+    }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        $user = User::findOrFail($id);
+
+        if (request()->user()->cannot('delete', auth()->user(), $user)) {
+            abort(403);
+        }
+
+        if ($user->delete()) {
+            return redirect()->route('clients.index');
+        } else {
+            return back()->with('error', 'Erro ao deletar usuário');
+        }
+    }
+
+    private function instantiate(int|null $id, array $data): User|RedirectResponse
+    {
+        $validator = Validator::make($data, [
             'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'cpf' => ['required', new CpfRule(), 'unique:users', 'size:11'],
-            'rg' => 'required|size:9|unique:users',
+            'email' => [
+                'required',
+                'email',
+                'unique:users,email,' . $id,
+            ],
+            'cpf' => [
+                'required',
+                new CpfRule(),
+                'unique:users,cpf,' . $id,
+                'size:11'
+            ],
+            'rg' => [
+                'required',
+                'size:9',
+                'unique:users,rg,' . $id
+            ],
             'cep' => 'required|size:8',
             'city' => 'required',
             'address' => 'required',
@@ -60,7 +134,9 @@ class ClientController extends Controller
 
         $data = $validator->validated();
 
-        $newUser = new User([
+        $user = $id ? User::findOrFail($id) : new User();
+
+        $user->fill([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt(Str::random(16)),
@@ -75,12 +151,6 @@ class ClientController extends Controller
             'state' => $data['state']
         ]);
 
-        if ($newUser->save()) {
-            Password::sendResetLink(['email' => $newUser['email']]);
-
-            return redirect()->route('clients.index');
-        } else {
-            return back()->with('error', 'Erro ao criar usuário')->withInput(request()->except('password'));
-        }
+        return $user;
     }
 }
