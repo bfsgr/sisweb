@@ -31,9 +31,6 @@
                             data-mask="(00) 0000-0000"
                         @endif
                         @break
-                        @case("email")
-                            data-mask=""
-                        @break
                         @endswitch
                     >{{$p->key}}</td>
                     <td>{{$p->created_at->setTimezone('America/Sao_Paulo')->format("d/m/Y - H:i")}}</td>

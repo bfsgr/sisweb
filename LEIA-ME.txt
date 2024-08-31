@@ -1,0 +1,51 @@
+Aluno: Bruno Fusieger de Oliveira
+RA: 112646
+
+Trabalho de programação de sistemas web
+Professor: Andre Felipe Ribeiro Cordeiro
+
+O sistema conta com os seguintes recursos:
+
+Como CLIENTE:
+    - Cadastro, visualização e edição do cliente logado
+        - Conta com os dados: Nome, CPF, RG, email, senha, telefone, CEP, endereço, número, complemento, bairro, cidade, estado
+        - O cadastro/edição de endereço usa o serviço da BrasilAPI para busca de dados por CEP (https://brasilapi.com.br/)
+    - Login e logout
+    - Cadastro, visualização, edição e remoção de cartões de crédito e débito do cliente logado
+        - Conta com os dados: tipo (débito ou crédito), número, validade, bandeira, código de segurança (CVV)
+    - Cadastro, visualização, edição e remoção de chaves pix do cliente logado
+        - Conta com os dados: chave, tipo (CPF, email, telefone)
+    - Cadastro, visualização e remoção de comentários/sugestões do cliente logado
+
+Como FUNCIONÁRIO:
+    - Cadastro, visualização, busca, edição e remoção de clientes
+    - Visualização e remoção de comentários/sugestões
+    - Visualização e edição de dados de perfil do funcionário logado
+        - Conta com os dados: Nome, email, senha, telefone, CEP, endereço, número, complemento, bairro, cidade, estado
+        - O cadastro/edição de endereço usa o serviço da BrasilAPI para busca de dados por CEP (https://brasilapi.com.br/)
+    - O funcionário não pode cadastrar, editar ou remover cartões de crédito e débito, nem chaves pix para si mesmo ou para clientes
+
+
+Como executar o projeto:
+É recomendado usar o Docker para executar o projeto.
+Para isso, basta executar o comando `docker-compose up` na raiz do projeto.
+
+Depois disso o projeto estará disponível em http://localhost:8000
+
+O usuário padrão para acesso como funcionário é:
+- email: admin@psweb.com
+- senha: psweb
+
+Ao criar um usuário como funcionário, o sistema envia um email para o email do usuário com um link para redefinição de senha.
+Esse email pode ser capturado usando o MailHog, que está disponível em http://localhost:8025
+Observe que: O link de redefinição só vai abrir se não houver usuário logado no navegador.
+Se houver, o link vai dar 403 Forbidden.
+
+Técnologias utilizadas:
+- PHP 8.3
+- Laravel 11
+- MySQL 9.0
+- Servidor Web Apache
+- Mailhog
+
+

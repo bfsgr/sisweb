@@ -1,4 +1,16 @@
 services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: app
+        ports:
+            - "9000:80"
+        networks:
+            - bridge
+        depends_on:
+            - mysql
+            - mailhog
     mysql:
         image: mysql
         environment:
@@ -11,5 +23,17 @@ services:
         ports:
             - "3306:3306"
         restart: unless-stopped
+        networks:
+            - bridge
+    mailhog:
+        image: mailhog/mailhog
+        ports:
+            - "1025:1025"
+            - "8025:8025"
+        networks:
+            - bridge
 volumes:
     mysql: null
+networks:
+    bridge:
+        driver: bridge

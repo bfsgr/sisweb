@@ -14,21 +14,25 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@psweb.com',
-            'password' => bcrypt('psweb'),
-            'rg' => '495016226',
-            'cpf' => '47044664008',
-            'cep' => '87083740',
-            'address' => 'Rua Joaquim P Guedes',
-            'addressNumber' => '100',
-            'complement' => 'Casa',
-            'neighborhood' => 'Jardim Paris VI',
-            'city' => 'Maringá',
-            'state' => 'PR',
-            'isAdmin' => true,
-            'role' => 'employee',
-        ]);
+        $admin = User::where(['email' => 'admin@psweb.com'])->exists();
+
+        if (!$admin) {
+            User::factory()->create([
+                'name' => 'Admin',
+                'email' => 'admin@psweb.com',
+                'password' => bcrypt('psweb'),
+                'rg' => '495016226',
+                'cpf' => '47044664008',
+                'cep' => '87083740',
+                'address' => 'Rua Joaquim P Guedes',
+                'addressNumber' => '100',
+                'complement' => 'Casa',
+                'neighborhood' => 'Jardim Paris VI',
+                'city' => 'Maringá',
+                'state' => 'PR',
+                'isAdmin' => true,
+                'role' => 'employee',
+            ]);
+        }
     }
 }

@@ -14,7 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->enum('type', ['cpf', 'email', 'phone']);
             $table->string('key');
-            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('user_id')
+                ->constrained('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
             $table->timestamps();
         });
     }
