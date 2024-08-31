@@ -4,7 +4,7 @@ RA: 112646
 Trabalho de programação de sistemas web
 Professor: Andre Felipe Ribeiro Cordeiro
 
-O sistema conta com os seguintes recursos:
+# O sistema conta com os seguintes recursos:
 
 Como CLIENTE:
     - Cadastro, visualização e edição do cliente logado
@@ -26,8 +26,8 @@ Como FUNCIONÁRIO:
     - O funcionário não pode cadastrar, editar ou remover cartões de crédito e débito, nem chaves pix para si mesmo ou para clientes
 
 
-Como executar o projeto:
-É recomendado usar o Docker para executar o projeto.
+# Como executar o projeto:
+É recomendado usar o Docker para executar o projeto. https://docs.docker.com/engine/install/
 Para isso, basta executar o comando `docker-compose up` na raiz do projeto.
 
 Depois disso o projeto estará disponível em http://localhost:8000
@@ -47,5 +47,12 @@ Técnologias utilizadas:
 - MySQL 9.0
 - Servidor Web Apache
 - Mailhog
+- Bootstrap 3
+- Jquery 2.1.0
+- Plugin Jquery-Mask
+- Fonte Glyphicons
 
+Para o desenvolvimento foi utilizado o servidor de desenvolvimento do Laravel (artisan serve), Vite em modo dev (npm run dev), além do docker para containers do MySQL e Mailhog
+A IDE utilizada foi o PhpStorm
 
+Projeto no Github https://github.com/bfsgr/sisweb
