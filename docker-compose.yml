@@ -5,7 +5,7 @@ services:
             dockerfile: Dockerfile
         container_name: app
         ports:
-            - "9000:80"
+            - "8000:80"
         networks:
             - bridge
         depends_on:
